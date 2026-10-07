@@ -16,8 +16,6 @@ O cache restaura os chunks solicitados antes de inserir os que saíram do alcanc
 
 ## Validação
 
-23 testes passaram, incluindo topologia e índices das lâminas, subconjunto do LOD, normais e variantes dos templates, streaming e retorno pelo cache. A renderização offscreen com sombras baixas foi executada e a captura foi inspecionada.
-
 Benchmark final local, 20 segundos, seed 938472, 1280 × 720, raio de dois chunks, sombras LOW:
 
 ```powershell
