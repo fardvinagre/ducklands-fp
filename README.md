@@ -132,4 +132,3 @@ Documentação técnica:
 - [Interface e densidade](docs/interface-v0.4.md)
 - [Simulação de água e integração das margens](docs/water-v0.5.md)
 
-A especificação inicial está em [`ducklands_fps_python_spec.md`](ducklands_fps_python_spec.md).
