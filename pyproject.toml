@@ -1,0 +1,19 @@
+[project]
+name = "ducklands"
+version = "0.5.0"
+description = "Laboratorio FPS procedural em Python e Panda3D"
+requires-python = ">=3.12"
+dependencies = ["panda3d==1.10.16", "numpy>=2.0,<3"]
+
+[project.scripts]
+ducklands = "game.main:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["game*"]
+
+[tool.setuptools.package-data]
+game = ["shaders/*.vert", "shaders/*.frag"]
