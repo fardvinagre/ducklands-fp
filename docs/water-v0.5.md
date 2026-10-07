@@ -1,6 +1,6 @@
 # Água — v0.5
 
-Referência: Wang et al., *Physics-based fluid simulation in computer graphics: Survey, research trends, and challenges* (2024), DOI [10.1007/s41095-023-0368-y](https://www.sciopen.com/article/10.1007/s41095-023-0368-y). O PDF fornecido está em [s41095-023-0368-y.pdf](s41095-023-0368-y.pdf).
+Referência: Wang et al., *Physics-based fluid simulation in computer graphics: Survey, research trends, and challenges* (2024), DOI [10.1007/s41095-023-0368-y](https://www.sciopen.com/article/10.1007/s41095-023-0368-y). 
 
 O artigo é uma revisão de métodos. Esta implementação adapta a ideia de **simulação restrita à superfície**, discutida na seção 8.1, páginas 27–28 do PDF (829–830 impressas). Também aplica a separação entre a simulação mais grossa e detalhes finos de aparência. Não implementa o método iWave, o método de síntese de wakes citado pelo artigo, SPH nem Navier–Stokes completo.
 
