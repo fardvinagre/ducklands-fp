@@ -1,4 +1,4 @@
-# Ducklands FPS
+# Ducklands FP
 
 Jogo de exploração em primeira pessoa, com mundo procedural, vegetação densa e patos animados. Desenvolvido em Python com Panda3D e NumPy, com visual low-poly.
 
