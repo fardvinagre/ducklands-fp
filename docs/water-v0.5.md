@@ -29,7 +29,7 @@ O reflexo representa o céu, sem renderizar novamente árvores, terreno ou patos
 
 ## Validação
 
-Os 33 testes do projeto passaram. Os testes de água verificam propagação, compensação de volume, amortecimento, estabilidade sob impulsos excessivos, limite de subpassos, bloqueio por uma barreira seca, profundidade coerente com colisões, ordem dos canais da textura, limites de culling, geração de wakes, pausa, descarregamento e limite de quatro lagos ativos. Capturas offscreen com 25 chunks e 948.845 tufos foram inspecionadas; os shaders renderizaram sem erros.
+Os testes de água verificam propagação, compensação de volume, amortecimento, estabilidade sob impulsos excessivos, limite de subpassos, bloqueio por uma barreira seca, profundidade coerente com colisões, ordem dos canais da textura, limites de culling, geração de wakes, pausa, descarregamento e limite de quatro lagos ativos. Capturas offscreen com 25 chunks e 948.845 tufos foram inspecionadas.
 
 Ensaio isolado de 1.200 atualizações da água, com dois lagos ativos e jogador em movimento, sem renderização GPU: mediana **0,48 ms**, p95 **0,95 ms**, pior atualização **6,65 ms**. A primeira criação foi excluída, mas as criações subsequentes permanecem nessa amostra. Esses valores não incluem desenho na GPU nem IA dos patos.
 
@@ -53,14 +53,12 @@ Resultados offscreen são locais à máquina e não garantem desempenho em janel
 
 [Prévia da margem e do contorno irregular](lake-shoreline-v0.5.png).
 
-Os lagos agora usam um perfil radial assimétrico, combinando três harmônicos com uma fase derivada da seed e da posição de cada lago. Isso gera alongamentos, enseadas e variações entre lados opostos. A extensão máxima é limitada para manter o streaming e a grade de 65 × 65. O lago inicial varia aproximadamente entre 12 e 22,6 m de raio conforme a direção.
+Os lagos usam um perfil radial assimétrico, combinando três harmônicos com uma fase derivada da seed e da posição de cada lago. Isso gera alongamentos, enseadas e variações entre lados opostos. A extensão máxima é limitada para manter o streaming e a grade de 65 × 65. O lago inicial varia aproximadamente entre 12 e 22,6 m de raio conforme a direção.
 
 O mesmo perfil define a depressão do terreno e o limite amostrado pela textura de profundidade. O shader deixa de recortar um círculo: a presença de água depende da profundidade sobre os triângulos do terreno. Consultas de água para colisões e comportamento dos patos usam esses mesmos triângulos. A interpolação da textura ainda pode produzir diferenças submétricas na linha d'água.
 
 A altura do terreno continua subindo após a margem, eliminando o anel plano anterior. Tons de solo úmido se misturam gradualmente à cor do terreno, com largura variável por ruído procedural. A grama chega à margem seca em manchas, ficando menor e menos densa perto da água. Árvores e pedras mantêm um pequeno afastamento. O posicionamento próximo dos lagos considera a altura efetiva dos triângulos, evitando vegetação submersa ou flutuando na encosta.
 
 As consultas escalares de altura possuem um cache LRU de até 64 grades de terreno. O cache conserva a mesma interpolação dos triângulos, limita a memória e evita recalcular ruído e contornos nas consultas frequentes de jogador/patos. Workers continuam usando o caminho NumPy vetorizado.
-
-**Validação desta alteração:** 36 testes passaram, incluindo assimetria e limites do contorno, coerência entre profundidade e detecção de água, subida da margem, equivalência entre consultas escalares/vetorizadas e limite do cache. Capturas da margem e de uma vista elevada foram inspecionadas. Um smoke com 25 chunks carregou cerca de 967 mil tufos e renderizou sem erros.
 
 Benchmark de streaming de 20 s com o cache de altura, seed 938472, 1280 × 720, sombras LOW, 40.000 candidatos por chunk: **79,4 FPS**, p50/p95/p99 **10,17 / 26,70 / 44,58 ms**, pior frame **86,61 ms**, **41 de 1.588** frames acima de 33,3 ms. Ao final: 22 chunks prontos, três trabalhos em andamento, 859.233 tufos e aproximadamente 2.724 MiB de RAM. A densidade junto à margem recebeu depois um pequeno ajuste visual; os totais podem variar. Esses dados indicam média próxima dos 78,4 FPS da medição anterior, com picos de carregamento ainda presentes.
