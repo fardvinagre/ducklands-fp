@@ -19,8 +19,6 @@ Fundos escuros melhoram o contraste sobre água, grama e céu. Janelas pequenas 
 
 ## Validação
 
-26 testes passaram. A cobertura da interface verifica layouts de 320 × 240 a 2560 × 1440, ausência de sobreposição entre painéis, escala ampliada, posicionamento da mira, preservação de F1 durante resize e coexistência dos receptores de eventos. Capturas offscreen em 800 × 450 e 320 × 240 foram inspecionadas.
-
 Benchmark final de streaming, 20 segundos, seed 938472, 1280 × 720, sombras LOW, densidade 40.000:
 
 | Métrica | Resultado |
